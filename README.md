@@ -70,6 +70,3 @@ Aplicación web para la gestión de tareas estudiantiles desarrollada con **Angu
 - **Spec Driven Development**: El desarrollo se basó en la especificación previa ubicada en `specs/`.
 - **Idioma**: Todo el código fuente (variables, funciones, componentes) y la interfaz de usuario están en **español**.
 - **Control de Versiones**: Uso de ramas por funcionalidad (`feature branches`) y fusiones ordenadas en `main`.
-
-## Integrantes
-- [Tu Nombre/Usuario]
