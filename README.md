@@ -14,10 +14,6 @@ Aplicación web para la gestión de tareas estudiantiles desarrollada con **Angu
 | :---: | :---: |
 | ![Vista Principal](docs/screenshots/vista-principal.png) | ![Modal](docs/screenshots/modal-tareas.png) |
 
-| Temas de Colores | Resumen Estadístico |
-| :---: | :---: |
-| ![Temas](docs/screenshots/temas.png) | ![Resumen](docs/screenshots/resumen.png) |
-
 ## Estructura del Proyecto
 - `specs/`: Documentación técnica y planes de trabajo bajo estándar Spec Kit.
 - `frontend/`: Aplicación cliente en Angular 17+ con Tailwind CSS.
