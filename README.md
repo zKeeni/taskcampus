@@ -17,23 +17,29 @@ Aplicación web para la gestión de tareas estudiantiles desarrollada con **Angu
    ```bash
    cd backend
    ```
-2. Crear un entorno virtual:
+2. **Importante**: Si usas Linux (Ubuntu/Debian) y recibes errores de entorno externo o falta de pip/venv, instala primero:
    ```bash
-   python -m venv venv
+   sudo apt update
+   ```
+   *Nota: Si no tienes `pip` o `venv` instalados, el sistema te pedirá instalarlos.*
+3. Crear un entorno virtual (Recomendado):
+   ```bash
+   python3 -m venv venv
    source venv/bin/activate  # En Windows: venv\Scripts\activate
    ```
-3. Instalar dependencias:
+4. Instalar dependencias:
    ```bash
    pip install -r requirements.txt
    ```
-4. Configurar la base de datos:
+   *Si no usas venv y tienes errores de PEP 668, puedes usar: `pip install -r requirements.txt --break-system-packages` (no recomendado).*
+5. Configurar la base de datos:
    - Crear una base de datos en PostgreSQL llamada `taskcampus`.
    - Copiar `.env.ejemplo` a `.env` y ajustar la `DATABASE_URL` si es necesario.
-5. Iniciar el servidor:
+6. Iniciar el servidor:
    ```bash
-   uvicorn backend.principal:app --reload
+   # Desde la carpeta backend
+   PYTHONPATH=.. uvicorn principal:app --reload
    ```
-   *Nota: Ejecutar desde la raíz de la carpeta `taskcampus` o ajustar el path del módulo.*
 
 ## Configuración del Frontend (Angular)
 1. Navegar a la carpeta frontend:
