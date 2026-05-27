@@ -41,7 +41,8 @@
       </div>
 
       <button (click)="filtrar()" 
-              class="bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition-all font-bold text-sm shadow-lg shadow-blue-200 active:scale-95">
+              [ngClass]="servicioTemas.obtenerClaseBoton()"
+              class="text-white px-5 py-2 rounded-xl transition-all font-bold text-sm shadow-lg active:scale-95">
         Aplicar Filtros
       </button>
     </div>

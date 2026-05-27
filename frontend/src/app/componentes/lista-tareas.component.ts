@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tarea } from '../modelos/tarea.modelo';
+import { ServicioTemas } from '../servicios/servicio-temas.service';
 
 @Component({
   selector: 'app-lista-tareas',
@@ -21,6 +22,8 @@ export class ListaTareasComponent {
     prioridad: '',
     asignatura: ''
   };
+
+  constructor(public servicioTemas: ServicioTemas) {}
 
   filtrar() {
     // Un pequeño retraso asegura que [(ngModel)] haya terminado de actualizar la variable local
