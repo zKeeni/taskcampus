@@ -11,7 +11,7 @@ def obtener_tareas(bd: Session, estado: str = None, prioridad: str = None, asign
     if prioridad:
         consulta = consulta.filter(modelos.Tarea.prioridad == prioridad)
     if asignatura:
-        consulta = consulta.filter(modelos.Tarea.asignatura == asignatura)
+        consulta = consulta.filter(modelos.Tarea.asignatura.ilike(f"%{asignatura}%"))
     return consulta.all()
 
 def crear_tarea(bd: Session, tarea: esquemas.TareaCrear):

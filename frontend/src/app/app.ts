@@ -23,6 +23,7 @@ export class App implements OnInit {
   resumen: ResumenTareas = { total: 0, pendientes: 0, finalizadas: 0, alta_prioridad: 0 };
   tareaSeleccionada?: Tarea;
   mostrarModal = false;
+  filtrosActuales: any = {};
 
   constructor(private servicioTareas: ServicioTareas) {}
 
@@ -31,7 +32,10 @@ export class App implements OnInit {
   }
 
   cargarDatos(filtros?: any) {
-    this.servicioTareas.listarTareas(filtros).subscribe(tareas => {
+    if (filtros) {
+      this.filtrosActuales = filtros;
+    }
+    this.servicioTareas.listarTareas(this.filtrosActuales).subscribe(tareas => {
       this.tareas = tareas;
     });
     this.servicioTareas.obtenerResumen().subscribe(resumen => {
@@ -47,12 +51,12 @@ export class App implements OnInit {
   guardarTarea(tarea: Tarea) {
     if (tarea.id) {
       this.servicioTareas.actualizarTarea(tarea.id, tarea).subscribe(() => {
-        this.cargarDatos();
+        this.cargarDatos(this.filtrosActuales);
         this.cerrarModal();
       });
     } else {
       this.servicioTareas.crearTarea(tarea).subscribe(() => {
-        this.cargarDatos();
+        this.cargarDatos(this.filtrosActuales);
         this.cerrarModal();
       });
     }
@@ -66,7 +70,7 @@ export class App implements OnInit {
   eliminarTarea(id: number) {
     if (confirm('¿Estás seguro de eliminar esta tarea?')) {
       this.servicioTareas.eliminarTarea(id).subscribe(() => {
-        this.cargarDatos();
+        this.cargarDatos(this.filtrosActuales);
       });
     }
   }
