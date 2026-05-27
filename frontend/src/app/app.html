@@ -28,7 +28,8 @@
           [tareas]="tareas"
           (alFiltrar)="cargarDatos($event)"
           (alEditar)="editarTarea($event)"
-          (alEliminar)="eliminarTarea($event)">
+          (alEliminar)="eliminarTarea($event)"
+          (alCambiarEstado)="guardarTarea($event)">
         </app-lista-tareas>
       </section>
     </main>

@@ -14,6 +14,7 @@ export class ListaTareasComponent {
   @Output() alFiltrar = new EventEmitter<any>();
   @Output() alEditar = new EventEmitter<Tarea>();
   @Output() alEliminar = new EventEmitter<number>();
+  @Output() alCambiarEstado = new EventEmitter<Tarea>();
 
   filtros = {
     estado: '',
@@ -23,5 +24,10 @@ export class ListaTareasComponent {
 
   filtrar() {
     this.alFiltrar.emit({ ...this.filtros });
+  }
+
+  alternarEstado(tarea: Tarea) {
+    const nuevoEstado = tarea.estado === 'finalizada' ? 'pendiente' : 'finalizada';
+    this.alCambiarEstado.emit({ ...tarea, estado: nuevoEstado });
   }
 }

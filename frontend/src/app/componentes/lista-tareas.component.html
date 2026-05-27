@@ -9,8 +9,8 @@
     
     <div class="flex flex-wrap items-center gap-3">
       <div class="relative">
-        <select [(ngModel)]="filtros.estado" (ngModelChange)="filtrar()" 
-                class="appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2 pl-4 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm">
+        <select [(ngModel)]="filtros.estado" (change)="filtrar()" 
+                class="appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2 pl-4 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm cursor-pointer">
           <option value="">Todos los Estados</option>
           <option value="pendiente">Pendiente</option>
           <option value="en proceso">En Proceso</option>
@@ -22,8 +22,8 @@
       </div>
 
       <div class="relative">
-        <select [(ngModel)]="filtros.prioridad" (ngModelChange)="filtrar()" 
-                class="appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2 pl-4 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm">
+        <select [(ngModel)]="filtros.prioridad" (change)="filtrar()" 
+                class="appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2 pl-4 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm cursor-pointer">
           <option value="">Todas las Prioridades</option>
           <option value="baja">Baja</option>
           <option value="media">Media</option>
@@ -35,7 +35,7 @@
       </div>
 
       <div class="relative">
-        <input type="text" [(ngModel)]="filtros.asignatura" (ngModelChange)="filtrar()" 
+        <input type="text" [(ngModel)]="filtros.asignatura" (input)="filtrar()" 
                placeholder="Buscar asignatura..." 
                class="bg-gray-50 border border-gray-200 text-gray-700 py-2 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm w-48">
       </div>
@@ -46,6 +46,7 @@
     <table class="w-full text-left">
       <thead class="bg-gray-50/50 text-gray-600 text-sm uppercase font-semibold">
         <tr>
+          <th class="px-6 py-4 w-16 text-center">OK</th>
           <th class="px-6 py-4">Información de Tarea</th>
           <th class="px-6 py-4">Asignatura</th>
           <th class="px-6 py-4">Fecha Entrega</th>
@@ -56,8 +57,24 @@
       </thead>
       <tbody class="divide-y divide-gray-100">
         <tr *ngFor="let tarea of tareas" class="hover:bg-blue-50/30 transition-colors group">
+          <td class="px-6 py-4 text-center">
+            <label class="relative inline-flex items-center cursor-pointer group/check">
+              <input type="checkbox" [checked]="tarea.estado === 'finalizada'"
+                     (change)="alternarEstado(tarea)"
+                     class="sr-only peer">
+              <div class="w-6 h-6 bg-white border-2 border-gray-300 rounded-lg peer peer-checked:bg-green-500 peer-checked:border-green-500 transition-all duration-200 flex items-center justify-center group-hover/check:border-blue-400">
+                <svg class="w-4 h-4 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+            </label>
+          </td>
           <td class="px-6 py-4">
-            <div class="font-bold text-gray-900 group-hover:text-blue-700 transition-colors">{{ tarea.titulo }}</div>
+            <div [class.line-through]="tarea.estado === 'finalizada'" 
+                 [class.text-gray-400]="tarea.estado === 'finalizada'"
+                 class="font-bold text-gray-900 group-hover:text-blue-700 transition-colors">
+              {{ tarea.titulo }}
+            </div>
             <div class="text-sm text-gray-500 line-clamp-1">{{ tarea.descripcion }}</div>
           </td>
           <td class="px-6 py-4">
@@ -89,7 +106,7 @@
               {{ tarea.estado }}
             </span>
           </td>
-          <td class="px-6 py-4">
+          <td class="px-6 py-4 text-center">
             <div class="flex justify-center space-x-2">
               <button (click)="alEditar.emit(tarea)" 
                       class="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"
@@ -109,7 +126,7 @@
           </td>
         </tr>
         <tr *ngIf="tareas.length === 0">
-          <td colspan="6" class="px-6 py-12 text-center">
+          <td colspan="7" class="px-6 py-12 text-center">
             <div class="flex flex-col items-center text-gray-400">
               <svg class="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
