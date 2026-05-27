@@ -32,7 +32,15 @@ Este documento sirve como evidencia del flujo de trabajo basado en ramas y revis
 - **Descripción**: 
   - Separación de lógica (.ts) y plantillas (.html).
   - Implementación de modales para gestión de tareas.
-  - Filtrado 100% reactivo sin necesidad de clics manuales.
-  - Checkbox de finalización rápida con actualización inmediata.
   - Identidad visual institucional (UTMACH).
+- **Estado**: Aprobado y Fusionado.
+
+## PR #7: Refinamientos Técnicos y UX Final
+- **Rama Origen**: `frontend-refinamiento-final`
+- **Descripción**: 
+  - Corrección de sincronización de filtros (un solo clic).
+  - Botón de filtrado manual según preferencia del usuario.
+  - Persistencia de filtros al actualizar/finalizar tareas.
+  - Visibilidad permanente de botones de acción.
+  - Checkbox de finalización rápida con diseño personalizado.
 - **Estado**: Aprobado y Fusionado.

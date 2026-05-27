@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServicioTareas } from './servicios/servicio-tareas.service';
 import { Tarea, ResumenTareas } from './modelos/tarea.modelo';
@@ -25,7 +25,10 @@ export class App implements OnInit {
   mostrarModal = false;
   filtrosActuales: any = {};
 
-  constructor(private servicioTareas: ServicioTareas) {}
+  constructor(
+    private servicioTareas: ServicioTareas,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.cargarDatos();
@@ -33,13 +36,15 @@ export class App implements OnInit {
 
   cargarDatos(filtros?: any) {
     if (filtros) {
-      this.filtrosActuales = filtros;
+      this.filtrosActuales = { ...filtros };
     }
     this.servicioTareas.listarTareas(this.filtrosActuales).subscribe(tareas => {
       this.tareas = tareas;
+      this.cdr.detectChanges(); // Forzar actualización de la vista
     });
     this.servicioTareas.obtenerResumen().subscribe(resumen => {
       this.resumen = resumen;
+      this.cdr.detectChanges();
     });
   }
 

@@ -23,7 +23,10 @@ export class ListaTareasComponent {
   };
 
   filtrar() {
-    this.alFiltrar.emit({ ...this.filtros });
+    // Un pequeño retraso asegura que [(ngModel)] haya terminado de actualizar la variable local
+    setTimeout(() => {
+      this.alFiltrar.emit({ ...this.filtros });
+    }, 0);
   }
 
   alternarEstado(tarea: Tarea) {
