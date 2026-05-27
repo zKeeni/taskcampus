@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tarea } from '../modelos/tarea.modelo';
+import { ServicioTemas } from '../servicios/servicio-temas.service';
 
 @Component({
   selector: 'app-formulario-tarea',
@@ -16,6 +17,8 @@ export class FormularioTareaComponent implements OnChanges {
 
   tarea: Tarea = this.limpiarTarea();
   editando = false;
+
+  constructor(public servicioTemas: ServicioTemas) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['tareaInicial'] && this.tareaInicial) {
