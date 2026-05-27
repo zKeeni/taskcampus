@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServicioTareas } from './servicios/servicio-tareas.service';
+import { ServicioTemas, TipoTema } from './servicios/servicio-temas.service';
 import { Tarea, ResumenTareas } from './modelos/tarea.modelo';
 import { ResumenTareasComponent } from './componentes/resumen-tareas.component';
 import { FormularioTareaComponent } from './componentes/formulario-tarea.component';
@@ -27,11 +28,17 @@ export class App implements OnInit {
 
   constructor(
     private servicioTareas: ServicioTareas,
+    public servicioTemas: ServicioTemas,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.cargarDatos();
+  }
+
+  cambiarTema(tema: TipoTema) {
+    this.servicioTemas.establecerTema(tema);
+    this.cdr.detectChanges();
   }
 
   cargarDatos(filtros?: any) {
