@@ -9,7 +9,7 @@
     
     <div class="flex flex-wrap items-center gap-3">
       <div class="relative">
-        <select [(ngModel)]="filtros.estado" (change)="filtrar()" 
+        <select [(ngModel)]="filtros.estado" 
                 class="appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2 pl-4 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm cursor-pointer">
           <option value="">Todos los Estados</option>
           <option value="pendiente">Pendiente</option>
@@ -22,7 +22,7 @@
       </div>
 
       <div class="relative">
-        <select [(ngModel)]="filtros.prioridad" (change)="filtrar()" 
+        <select [(ngModel)]="filtros.prioridad" 
                 class="appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2 pl-4 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm cursor-pointer">
           <option value="">Todas las Prioridades</option>
           <option value="baja">Baja</option>
@@ -35,10 +35,15 @@
       </div>
 
       <div class="relative">
-        <input type="text" [(ngModel)]="filtros.asignatura" (input)="filtrar()" 
+        <input type="text" [(ngModel)]="filtros.asignatura" (keyup.enter)="filtrar()" 
                placeholder="Buscar asignatura..." 
                class="bg-gray-50 border border-gray-200 text-gray-700 py-2 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm w-48">
       </div>
+
+      <button (click)="filtrar()" 
+              class="bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition-all font-bold text-sm shadow-lg shadow-blue-200 active:scale-95">
+        Aplicar Filtros
+      </button>
     </div>
   </div>
 
