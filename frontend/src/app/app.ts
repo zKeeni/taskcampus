@@ -22,6 +22,7 @@ export class App implements OnInit {
   tareas: Tarea[] = [];
   resumen: ResumenTareas = { total: 0, pendientes: 0, finalizadas: 0, alta_prioridad: 0 };
   tareaSeleccionada?: Tarea;
+  mostrarModal = false;
 
   constructor(private servicioTareas: ServicioTareas) {}
 
@@ -38,22 +39,28 @@ export class App implements OnInit {
     });
   }
 
+  abrirNuevoModal() {
+    this.tareaSeleccionada = undefined;
+    this.mostrarModal = true;
+  }
+
   guardarTarea(tarea: Tarea) {
     if (tarea.id) {
       this.servicioTareas.actualizarTarea(tarea.id, tarea).subscribe(() => {
         this.cargarDatos();
-        this.tareaSeleccionada = undefined;
+        this.cerrarModal();
       });
     } else {
       this.servicioTareas.crearTarea(tarea).subscribe(() => {
         this.cargarDatos();
+        this.cerrarModal();
       });
     }
   }
 
   editarTarea(tarea: Tarea) {
-    this.tareaSeleccionada = tarea;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.tareaSeleccionada = { ...tarea };
+    this.mostrarModal = true;
   }
 
   eliminarTarea(id: number) {
@@ -64,7 +71,8 @@ export class App implements OnInit {
     }
   }
 
-  cancelarEdicion() {
+  cerrarModal() {
+    this.mostrarModal = false;
     this.tareaSeleccionada = undefined;
   }
 }

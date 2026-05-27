@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Date
-from .basedatos import Base
+from basedatos import Base
 
 class Tarea(Base):
     __tablename__ = "tareas"

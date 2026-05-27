@@ -1,0 +1,53 @@
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+  <div class="bg-white/90 backdrop-blur-sm p-5 rounded-2xl shadow-lg border-b-4 border-blue-500 transform hover:scale-105 transition-transform">
+    <div class="flex items-center justify-between mb-2">
+      <div class="p-2 bg-blue-100 rounded-lg">
+        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+        </svg>
+      </div>
+      <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Total</span>
+    </div>
+    <p class="text-3xl font-black text-gray-800">{{ resumen.total }}</p>
+    <p class="text-xs text-gray-500 font-medium mt-1">Tareas registradas</p>
+  </div>
+
+  <div class="bg-white/90 backdrop-blur-sm p-5 rounded-2xl shadow-lg border-b-4 border-amber-500 transform hover:scale-105 transition-transform">
+    <div class="flex items-center justify-between mb-2">
+      <div class="p-2 bg-amber-100 rounded-lg">
+        <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Pendientes</span>
+    </div>
+    <p class="text-3xl font-black text-gray-800">{{ resumen.pendientes }}</p>
+    <p class="text-xs text-gray-500 font-medium mt-1">Por completar</p>
+  </div>
+
+  <div class="bg-white/90 backdrop-blur-sm p-5 rounded-2xl shadow-lg border-b-4 border-emerald-500 transform hover:scale-105 transition-transform">
+    <div class="flex items-center justify-between mb-2">
+      <div class="p-2 bg-emerald-100 rounded-lg">
+        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Éxito</span>
+    </div>
+    <p class="text-3xl font-black text-gray-800">{{ resumen.finalizadas }}</p>
+    <p class="text-xs text-gray-500 font-medium mt-1">Finalizadas</p>
+  </div>
+
+  <div class="bg-white/90 backdrop-blur-sm p-5 rounded-2xl shadow-lg border-b-4 border-red-500 transform hover:scale-105 transition-transform">
+    <div class="flex items-center justify-between mb-2">
+      <div class="p-2 bg-red-100 rounded-lg">
+        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        </svg>
+      </div>
+      <span class="text-xs font-bold text-red-600 uppercase tracking-wider">Crítico</span>
+    </div>
+    <p class="text-3xl font-black text-gray-800">{{ resumen.alta_prioridad }}</p>
+    <p class="text-xs text-gray-500 font-medium mt-1">Prioridad Alta</p>
+  </div>
+</div>

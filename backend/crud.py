@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from . import modelos, esquemas
+import modelos, esquemas
 
 def obtener_tarea(bd: Session, tarea_id: int):
     return bd.query(modelos.Tarea).filter(modelos.Tarea.id == tarea_id).first()

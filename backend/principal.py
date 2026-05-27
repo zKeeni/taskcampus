@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List, Optional
 
-from . import crud, modelos, esquemas, basedatos
+import crud, modelos, esquemas, basedatos
 
 # Crear las tablas en la base de datos
 modelos.Base.metadata.create_all(bind=basedatos.motor)

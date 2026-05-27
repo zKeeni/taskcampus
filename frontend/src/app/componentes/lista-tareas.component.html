@@ -1,0 +1,124 @@
+<div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden">
+  <div class="p-6 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-white/50">
+    <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+      <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+      </svg>
+      Listado de Tareas
+    </h2>
+    
+    <div class="flex flex-wrap items-center gap-3">
+      <div class="relative">
+        <select [(ngModel)]="filtros.estado" (ngModelChange)="filtrar()" 
+                class="appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2 pl-4 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm">
+          <option value="">Todos los Estados</option>
+          <option value="pendiente">Pendiente</option>
+          <option value="en proceso">En Proceso</option>
+          <option value="finalizada">Finalizada</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+          <svg class="fill-current h-4 w-4" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+        </div>
+      </div>
+
+      <div class="relative">
+        <select [(ngModel)]="filtros.prioridad" (ngModelChange)="filtrar()" 
+                class="appearance-none bg-gray-50 border border-gray-200 text-gray-700 py-2 pl-4 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm">
+          <option value="">Todas las Prioridades</option>
+          <option value="baja">Baja</option>
+          <option value="media">Media</option>
+          <option value="alta">Alta</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+          <svg class="fill-current h-4 w-4" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+        </div>
+      </div>
+
+      <div class="relative">
+        <input type="text" [(ngModel)]="filtros.asignatura" (ngModelChange)="filtrar()" 
+               placeholder="Buscar asignatura..." 
+               class="bg-gray-50 border border-gray-200 text-gray-700 py-2 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm w-48">
+      </div>
+    </div>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-left">
+      <thead class="bg-gray-50/50 text-gray-600 text-sm uppercase font-semibold">
+        <tr>
+          <th class="px-6 py-4">Información de Tarea</th>
+          <th class="px-6 py-4">Asignatura</th>
+          <th class="px-6 py-4">Fecha Entrega</th>
+          <th class="px-6 py-4">Prioridad</th>
+          <th class="px-6 py-4">Estado</th>
+          <th class="px-6 py-4 text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        <tr *ngFor="let tarea of tareas" class="hover:bg-blue-50/30 transition-colors group">
+          <td class="px-6 py-4">
+            <div class="font-bold text-gray-900 group-hover:text-blue-700 transition-colors">{{ tarea.titulo }}</div>
+            <div class="text-sm text-gray-500 line-clamp-1">{{ tarea.descripcion }}</div>
+          </td>
+          <td class="px-6 py-4">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+              {{ tarea.asignatura }}
+            </span>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600 font-medium">{{ tarea.fecha_entrega | date:'dd/MM/yyyy' }}</td>
+          <td class="px-6 py-4">
+            <span [ngClass]="{
+              'bg-red-100 text-red-700 border border-red-200': tarea.prioridad === 'alta',
+              'bg-amber-100 text-amber-700 border border-amber-200': tarea.prioridad === 'media',
+              'bg-emerald-100 text-emerald-700 border border-emerald-200': tarea.prioridad === 'baja'
+            }" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+              {{ tarea.prioridad }}
+            </span>
+          </td>
+          <td class="px-6 py-4">
+            <span [ngClass]="{
+              'bg-blue-100 text-blue-700': tarea.estado === 'en proceso',
+              'bg-green-100 text-green-700': tarea.estado === 'finalizada',
+              'bg-slate-100 text-slate-700': tarea.estado === 'pendiente'
+            }" class="px-3 py-1 rounded-full text-xs font-bold uppercase flex items-center w-fit">
+              <span class="w-2 h-2 rounded-full mr-2" [ngClass]="{
+                'bg-blue-500': tarea.estado === 'en proceso',
+                'bg-green-500': tarea.estado === 'finalizada',
+                'bg-slate-400': tarea.estado === 'pendiente'
+              }"></span>
+              {{ tarea.estado }}
+            </span>
+          </td>
+          <td class="px-6 py-4">
+            <div class="flex justify-center space-x-2">
+              <button (click)="alEditar.emit(tarea)" 
+                      class="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"
+                      title="Editar">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-5M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+              </button>
+              <button (click)="alEliminar.emit(tarea.id!)" 
+                      class="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors"
+                      title="Eliminar">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m4-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="tareas.length === 0">
+          <td colspan="6" class="px-6 py-12 text-center">
+            <div class="flex flex-col items-center text-gray-400">
+              <svg class="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+              </svg>
+              <p class="text-lg font-medium">No se encontraron tareas con estos filtros.</p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
